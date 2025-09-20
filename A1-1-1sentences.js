@@ -1,21 +1,3 @@
-/*
- * A1级别德语造句练习数据文件
- * 
- * 数据结构说明:
- * - sentences: 包含所有例句的数组
- *   - parts: 句子成分，分为4个slot
- *   - full: 完整的德语句子
- *   - translation: 中文翻译
- *   - verb: 动词原形（用于提示功能）
- *   - weight: 权重值，可能用于练习频率控制
- * - vocabulary: 词汇表，按词性分类
- *   - questionWords: 疑问词
- *   - verbs: 动词
- *   - subjects: 主语
- *   - others: 其他词汇（介词、副词等）
- *   - punctuation: 标点符号
- *   - gap: 空格占位符
- */
 
 window.sentencesData = {
   "sentences": [
@@ -787,6 +769,8 @@ window.sentencesData = {
       "verb": "lernen",
       "weight": 1
     },
+    // "仅至元德语内部学员使用",
+    // "未经同意请勿转发和商用"
     {
       "parts": {
         "slot1": "Frau Li",
