@@ -1,0 +1,513 @@
+/*
+ * 德语五位模型造句练习程序样式文件 - A1初学者模型-1
+ * 
+ * 样式说明:
+ * - 采用响应式设计，适配不同屏幕尺寸
+ * - 卡片布局: 
+ *   - 第1张卡片: 例句卡片(中文+德文)
+ *   - 第2张卡片: 第1位成分
+ *   - 第3张卡片: 第2位成分
+ *   - 第4张卡片: "其他"位(融合了原第3、4、5位成分)
+ * 
+ * 颜色方案:
+ * - 主色调: 蓝色(#3498db)用于强调和装饰
+ * - 背景色: 浅蓝到深蓝的渐变背景
+ * - 卡片正面: 白色背景
+ * - 卡片背面: 深蓝背景(#2c3e50)
+ * 
+ * 特殊样式:
+ * - 翻转动画效果
+ * - 水印装饰
+ * - 左侧蓝色装饰条
+ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    min-height: 100vh;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 100%;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.header {
+    text-align: center;
+    width: 100%;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    color: #f3a233;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+    margin: 6px 0;
+}
+
+.card {
+    height: 72px;
+    perspective: 1000px;
+    width: 100%;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-1 .card-front::before,
+.card-2 .card-front::before,
+.card-3 .card-front::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 8px;
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    border-radius: 12px 0 0 12px;
+}
+
+.card-front {
+    background: white;
+    color: #2c3e50;
+    font-size: 1.4rem;
+}
+
+.card-back {
+    background: #2c3e50;
+    color: white;
+}
+
+.card-0 .card-front {
+    background: white;
+    color: #2c3e50;
+}
+
+.card-0 .card-front .card-content {
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.card-0 .card-back {
+    background: #2c3e50;
+    color: white;
+}
+
+.card-0 .card-back .card-content {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}
+
+.card-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.card-content {
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+
+.model-part {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.validation-prompt {
+    position: absolute;
+    right: 15px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.25rem;
+}
+
+.watermark {
+    position: absolute;
+    font-size: 4rem;
+    font-weight: bold;
+    opacity: 0.25;
+    right: 12px;
+    bottom: 0;
+    z-index: 0;
+    color: white;
+}
+
+.card-0 .card-back .watermark {
+    color: #2c3e50;
+    opacity: 0.2;
+}
+
+.card-0 .card-front .watermark {
+    color: white;
+    opacity: 0.2;
+}
+
+.hint-btn {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.hint-btn:hover {
+    opacity: 1;
+}
+
+.hint-message {
+    position: absolute;
+    right: 15px;
+    bottom: 40px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    z-index: 10;
+    display: none;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 30%;
+    color: white;
+}
+
+.btn-answer {
+    background-color: #e74c3c;
+}
+
+.btn-reset {
+    background-color: #f39c12;
+}
+
+.btn-switch {
+    background-color: #27ae60;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.example-indicator {
+    font-size: 1rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.instructions {
+    background: rgba(236, 240, 241, 0.7);
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 15px;
+    width: 100%;
+    border: 1px solid rgba(127, 140, 141, 0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.instructions h2 {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.instructions ol {
+    padding-left: 18px;
+    margin: 0;
+}
+
+.instructions li {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #34495e;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}
+
+.copyright-line {
+    display: block;
+}
+
+.copyright hr {
+    width: 30%;
+    height: 1px;
+    background: #ddd;
+    border: none;
+    margin: 5px auto;
+}
+
+.combined-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* 改为左对齐 */
+    width: 100%;
+}
+
+.combined-card .separator {
+    flex: 0.2;
+}
+
+.card-3 .card-back .watermark {
+    position: absolute;
+    font-size: 2.55rem; /* 调整为当前的75% (3.4rem * 0.75 = 2.55rem) */
+    font-weight: bold;
+    opacity: 0.25;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    color: white;
+}
+
+/* 平板设备优化 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        gap: 12px;
+    }
+    
+    .card {
+        height: 70px;
+    }
+    
+    .card-number, .card-title, .card-content, .model-part {
+        font-size: 1.3rem;
+    }
+    
+    .btn {
+        padding: 10px 6px;
+        font-size: 0.9rem;
+    }
+    
+    .hint-btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+    
+    .hint-message {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+}
+
+/* 手机设备优化 */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    
+    .container {
+        gap: 10px;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .card {
+        height: 65px;
+    }
+    
+    .card-front, .card-back {
+        padding: 12px;
+    }
+    
+    .card-number {
+        font-size: 2rem;
+    }
+    
+    .card-title, .card-content, .model-part {
+        font-size: 1.1rem;
+    }
+    
+    .validation-prompt {
+        font-size: 1rem;
+        right: 10px;
+    }
+    
+    .btn-container {
+        gap: 8px;
+    }
+    
+    .btn {
+        padding: 8px 5px;
+        font-size: 0.8rem;
+        min-width: 25%;
+    }
+    
+    .hint-btn {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+        border-radius: 12px;
+    }
+    
+    .hint-message {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+        bottom: 35px;
+        right: 10px;
+    }
+    
+    .instructions h2 {
+        font-size: 1rem;
+    }
+    
+    .instructions li {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+    
+    .copyright {
+        font-size: 0.7rem;
+    }
+    
+    .watermark {
+        font-size: 3.5rem;
+        right: 8px;
+    }
+    
+    .card-0 .card-back .watermark {
+        font-size: 3rem;
+    }
+    
+    .card-3 .card-back .watermark {
+        font-size: 2rem;
+    }
+}
+
+/* 小屏幕手机优化 */
+@media (max-width: 360px) {
+    body {
+        padding: 6px;
+    }
+    
+    .header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .card {
+        height: 60px;
+    }
+    
+    .card-front, .card-back {
+        padding: 10px;
+    }
+    
+    .card-number {
+        font-size: 1.8rem;
+    }
+    
+    .card-title, .card-content, .model-part {
+        font-size: 1rem;
+    }
+    
+    .validation-prompt {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 6px 4px;
+        font-size: 0.75rem;
+    }
+    
+    .hint-btn {
+        padding: 2px 5px;
+        font-size: 0.65rem;
+    }
+    
+    .hint-message {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+        bottom: 30px;
+    }
+}

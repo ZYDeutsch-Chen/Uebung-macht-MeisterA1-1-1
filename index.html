@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+ 至元德语原创造句练习程序 - A1初学者模型-1
+ 
+ 程序说明:
+ - 模型帮助学习者理解句子结构
+ - 针对A1初学者，只释放第1和第2位
+ - 提供交互式学习体验，可逐步验证答案
+ - 包含动词提示功能
+ 
+ 
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>至元德语 - 造句练习</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body oncontextmenu="return false;">
+    <div class="container">
+        <div class="header">
+            <h1>至元德语 - 造句练习</h1>
+        </div>
+        
+        <div class="cards-container">
+            <div class="card card-0">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-content"></div>
+                        <button class="hint-btn" onclick="showHint()">提示</button>
+                        <div class="hint-message" id="hintMessage"></div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-content"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card card-1" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-number">1</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="model-part"></div>
+                        <div class="watermark">1</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card card-2" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-number">2</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="model-part"></div>
+                        <div class="watermark">2</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card card-3" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-number">其他</div>
+                    </div>
+                    <div class="card-back combined-card">
+                        <div class="model-part"></div>
+                        <div class="model-part separator"></div>
+                        <div class="model-part"></div>
+                        <div class="watermark">其他</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn btn-answer" onclick="flipAllCards()">看答案</button>
+            <button class="btn btn-reset" onclick="resetAllCards()">重试</button>
+            <button class="btn btn-switch" onclick="switchExample()">下一句</button>
+        </div>
+        
+        <div class="example-indicator">例句 1/10</div>
+        
+        <div class="instructions">
+            <h2>使用说明</h2>
+            <ol>
+                <li>点击卡片1、2或其他来翻转卡片查看词汇</li>
+                <li>根据提示将词汇拖拽到句子中的正确位置</li>
+                <li>使用"提示"按钮获取帮助</li>
+                <li>"看答案"按钮显示完整句子和翻译</li>
+                <li>"重试"按钮清除当前答案并重新开始</li>
+                <li>"下一句"按钮切换到下一个练习句子</li>
+            </ol>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2023 至元德语 - 造句练习器</p>
+            <p>"仅至元德语内部学员使用"</p>
+            <p>"未经同意请勿转发和商用"</p>
+        </div>
+    </div>
+    
+    <script src="A1-1-1sentences.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
